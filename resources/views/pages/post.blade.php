@@ -17,4 +17,6 @@
         @empty
             <span>Pas de tags pour ce post</span>
         @endforelse
+
+
 @endsection

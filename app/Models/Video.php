@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class comment extends Model
+class Video extends Model
 {
     use HasFactory;
-
     //protected $fillable=['content'];
-    protected $guarded=[];
-
-    public function commentable()
+    //one to many polymorphic
+    public function comments()
     {
-        return $this->morphTo();
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
