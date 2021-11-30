@@ -9,9 +9,15 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable= ['title','content'];
-
+//One to many
     public function comments()
     {
         return $this->hasMany(comment::class);
+    }
+
+    //one to one
+    public function image()
+    {
+        return $this->hasOne(Image::class);
     }
 }
