@@ -10,4 +10,11 @@
     @empty
         <span>Pas de commentaire</span>
     @endforelse
+
+    <hr>
+        @forelse($post->tags as $tag)
+            <span class="text-blue-800"><a href="#">#{{$tag->name}}</a></span>
+        @empty
+            <span>Pas de tags pour ce post</span>
+        @endforelse
 @endsection

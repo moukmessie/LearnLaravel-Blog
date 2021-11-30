@@ -20,4 +20,11 @@ class Post extends Model
     {
         return $this->hasOne(Image::class);
     }
+
+    //many to many
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+
+    }
 }
