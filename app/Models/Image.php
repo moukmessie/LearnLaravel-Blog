@@ -13,4 +13,10 @@ class Image extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+        //has one through
+    public function artist()
+    {
+        return $this->hasOne(Artist::class);
+    }
 }
