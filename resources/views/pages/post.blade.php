@@ -25,6 +25,7 @@
         @endforelse
 
     <hr>
-{{--    <p>Publiée par {{$post->imageArtist->name}}</p>--}}
+{{--    <p>Publiée par {{$post->imageArtist->name}}</p> --}}
+
 
 @endsection
