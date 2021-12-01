@@ -3,7 +3,12 @@
 @section('content')
     <h1>Article</h1>
     <h2>{{$post->content}}</h2>
-        <span>{{$post->image ? $post->image->path : "Pas d'image"}}</span>
+        @if($post->image)
+            <img src="{{ Storage::url($post->image->path) }}" alt="">
+        @else
+            <span>Pas d'image</span>
+        @endif
+
 
 
     @forelse($post->comments as $comment)
@@ -20,6 +25,6 @@
         @endforelse
 
     <hr>
-    <p>Publiée par {{$post->imageArtist->name}}</p>
+{{--    <p>Publiée par {{$post->imageArtist->name}}</p>--}}
 
 @endsection

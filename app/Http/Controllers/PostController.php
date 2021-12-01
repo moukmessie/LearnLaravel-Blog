@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\comment;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Video;
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -58,13 +61,48 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-//        $post=new Post();
-//        $post->title=$request->title;
-//       $post->content=$request->input('content');
-        Post::create([
+//        $request->validate([
+//        'title'=>['required','max:255','min:5','unique:posts', new Uppercase],//ensemble de règle
+//        'content'=>['required']
+//    ]);
+
+      //Enregistrement image dans le dossier storage public avatars
+        $filename=time().'.'.$request->avatar->extension();
+       $path=$request->avatar->storeAs(
+           'avatars',
+           $filename,
+          'public'
+       );
+
+        /**
+         * Sachant qu'on a une relation one to one image et post
+         * on récupère notre post dans la variable $post
+         */
+        $post = Post::create([
             'title'=>$request->title,
             'content'=>$request->input('content')
         ]);
+
+        /**
+         * création d'une nouvelle instance image
+         *
+         */
+       $image= new Image();
+       $image->path = $path;//attribution du path a notre image
+
+        /**
+         * Enregistre automatiquement l'id du poste pour lequel est
+         * liée l'image en base de donnée
+         *
+         */
+        $post->image()->save($image);
+       //$image->post_id = $post->id;
+
+
+//        $image= Storage::disk('local')->put('avatars', $request->file('avatar'));
+//        Storage::get($image);
+
+
 
        dd('Post créé!');
 
