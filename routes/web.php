@@ -28,5 +28,7 @@ Route::get('/video/{id}',[\App\Http\Controllers\PostController::class, 'show_vid
 Route::get('/contact',[\App\Http\Controllers\PostController::class, 'contact'])->name('contact');
 
 
+Route::get('/testmail',[\App\Http\Controllers\PostController::class,'testmail']);
+
 /*ROUTE POST*/
 Route::post('/posts/create',[\App\Http\Controllers\PostController::class,'store'])->name('posts.store');

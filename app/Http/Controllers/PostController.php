@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
+use App\Mail\Testmarkdown;
 use App\Models\comment;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Video;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -143,6 +146,18 @@ class PostController extends Controller
         $comment3 = new Comment(['content'=>'commentaire de la video en dure']);
         //Enregistrement des commentaire de la video
         $video->comments()->save($comment3);
+    }
+//envoi de mail
+    public function testmail()
+    {
+        //Mail::to('test@mail.test')->send(new TestMail());//de façon statique
+        //Manière dynamique
+        //$user=['email'=>'user@test.com', 'name'=>'Dupon Matéo'];
+        //Mail::to($user['email'])->send(new TestMail($user));
+
+        //Markdown propose un template initialiser avec tailwind
+        Mail::to('testmark@blogpic.com')->send(new Testmarkdown());
+        return view('emails/testmail');
     }
 
 }
